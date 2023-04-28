@@ -1,6 +1,11 @@
 <template>
 	<view class="container">
-		<view class="type-writer-content" v-for="(item, index) in list" :key="index"><type-writer :contentList="item.contentList" :delaytime="item.delaytime"></type-writer></view>
+		<view class="type-writer-content" v-for="(item,index) in list" :key="index">
+		<type-writer   :uid="item.uid" :ref="`writer${item.uid}`" :contentList="item.contentList" :delaytime="item.delaytime"></type-writer>
+		</view>
+		<button @click="pause(0)">暂停打字</button>
+		<button @click="continues(0)">继续打字</button>
+		<button @click="reset(0)">重置</button>
 	</view>
 </template>
 
@@ -13,7 +18,8 @@ export default {
 			list: [
 				{
 					contentList: ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
-					delayTime: 300
+					delayTime: 300,
+					uid: 0
 				}
 			]
 		};
@@ -22,7 +28,8 @@ export default {
 		setTimeout(() => {
 			this.list.push({
 				contentList: ['bbbbbbbbbbbbbbbbbbbbbbbbbbb', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'],
-				delayTime: 500
+				delayTime: 500,
+				uid: 1
 			});
 		}, 2000);
 
@@ -30,7 +37,20 @@ export default {
 			this.list[1].contentList = this.list[1].contentList.concat(['ccccccccccccccccccccccccccccccccccc']);
 		}, 5000);
 	},
-	methods: {}
+	methods: {
+		finish(id, status) {
+			console.log(1, id, status);
+		},
+		pause(id, status) {
+			this.$refs[`writer${id}`][0].pause();
+		},
+		continues(id, status) {
+			this.$refs[`writer${id}`][0].continues();
+		},
+		reset(id, status) {
+			this.$refs[`writer${id}`][0].reset();
+		}
+	}
 };
 </script>
 

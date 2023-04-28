@@ -1,7 +1,7 @@
 <template>
 	<view class="type-writer-container">
 		<text>{{ contentText }}</text>
-		<text v-show="initPosition !== contentText.length" :style="{display:initPosition % 2 == 0||initPosition==total?'hidden':'inline-block'}">|</text>
+		<text v-show="initPosition !== contentText.length" :style="{ display: initPosition % 2 == 0 || initPosition == total ? 'hidden' : 'inline-block' }">|</text>
 	</view>
 </template>
 
@@ -13,13 +13,12 @@ export default {
 			type: Array,
 			required: true
 		},
-		uid: {
-			type: String || Number
-		},
-	
 		delaytime: {
 			type: Number,
 			default: 100
+		},
+		uid: {
+			type: String | Number
 		}
 	},
 	data() {
@@ -31,7 +30,7 @@ export default {
 		};
 	},
 	watch: {
-		contentList(newvalue){
+		contentList(newvalue) {
 			const me = this;
 			clearInterval(me.timer);
 			me.timer = null;
@@ -40,7 +39,7 @@ export default {
 	},
 	mounted() {
 		const me = this;
-		console.log(me.contentText);
+		console.log(me);
 		me.initWriter(me.contentList);
 	},
 	methods: {
@@ -68,7 +67,7 @@ export default {
 
 					// 拼接完成清除定时器
 					clearInterval(me.timer);
-					me.timer = null;
+					me.$emit('finish', me.uid, true);
 					return;
 				}
 
@@ -77,6 +76,20 @@ export default {
 				me.contentText = nowStr;
 			}, 200);
 			me.timer = timer;
+		},
+		pause() {
+			const me = this;
+			clearInterval(me.timer);
+			me.$emit('pause', me.uid, true);
+		},
+		continues() {
+			const me = this;
+			me.initWriter(me.contentList);
+		},
+		reset() {
+			const me = this;
+			me.initPosition = 0;
+			me.initWriter(me.contentList);
 		}
 	}
 };

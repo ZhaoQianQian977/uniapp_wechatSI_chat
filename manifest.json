@@ -1,6 +1,6 @@
 {
     "name" : "chatGPT",
-    "appid" : "__UNI__C7F52D0",
+    "appid" : "wxa318ffe2b3c45750",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -54,7 +54,13 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+		 "plugins": {
+		        "WechatSI": {
+		            "version": "0.0.7",
+		            "provider": "wx069ba97219f66d99"
+		        }
+		    }
     },
     "mp-alipay" : {
         "usingComponents" : true
