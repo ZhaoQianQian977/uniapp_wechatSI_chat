@@ -1,6 +1,6 @@
 {
     "name" : "chatGPT",
-    "appid" : "wxa318ffe2b3c45750",
+    "appid" : "__UNI__C7F52D0",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -50,17 +50,18 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxa318ffe2b3c45750",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true
         },
         "usingComponents" : true,
-		 "plugins": {
-		        "WechatSI": {
-		            "version": "0.0.7",
-		            "provider": "wx069ba97219f66d99"
-		        }
-		    }
+        "plugins" : {
+            "WechatSI" : {
+                "version" : "0.0.7",
+                "provider" : "wx069ba97219f66d99"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
